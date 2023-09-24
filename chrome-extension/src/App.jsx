@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useRef, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [response, setResponse] = useState(null) // Corrected 'resoponse' to 'response'
-
+  const [result, setResult] = useState(null) // Corrected 'resoponse' to 'response'
+  const pRef = useRef('Please extract text.')
   
 
   async function extractSelectedText() {
@@ -26,32 +24,8 @@ function App() {
       console.log('started');
       const data = (await response.json()).message
       console.log(data);
-      setResponse(data)
-  }
-
-  async function sendTextToServer(selectedText) {
-    try {
-      console.log('Sending request to server...'); 
-      const response = await fetch('http://127.0.0.1:8000/analyze', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify({ text: selectedText })
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      console.log('Received response from server:', data);
-      await setResponse(data);
-
-    } catch (error) {
-      console.error('Error sending data to server:', error);
-    }
+      pRef.current.textContent = data;
+      setResult(data)
   }
 
   const openExtensionPopup = () => {
@@ -69,10 +43,9 @@ function App() {
       <div className="card">
         <button onClick={openExtensionPopup}>Extract Text</button>
       </div>
-      {response && <p className="read-the-docs">
-        {response}
-      </p>}
-      {!response && <p className='read-the-docs'>please drag text and extract!</p>}
+      <p ref={pRef} className="read-the-docs">
+        {result}
+      </p>
     </>
   )
 }
