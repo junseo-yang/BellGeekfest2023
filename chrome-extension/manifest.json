@@ -1,11 +1,17 @@
 {
     "version": "1.0.0",
     "manifest_version": 3,
-    "name": "React Chrome Extension",
-    "description": "This is a Chrome extension built with React and TypeScript",
+    "name": "TCM (Terms & Conditions Manager)",
+    "description": "This is a terms & conditions manager chrome extension.",
     "action": {
         "default_popup": "index.html",
         "default_title": "React Chrome Extension"
+    },
+    "icons": {
+        "16": "icon-16x16.png",
+        "32": "icon-32x32.png",
+        "48": "icon-48x48.png",
+        "128": "icon-128x128.png"
     },
     "permissions": [
         "activeTab",
