@@ -21,4 +21,3 @@ backend running with token to acces to open AI
 # Developer requirements
 ## OpenAI
 This system requires to have openAI token to accesss their system.
-## Python 3.9.11
