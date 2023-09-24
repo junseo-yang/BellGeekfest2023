@@ -179,6 +179,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 **Jaewon Yang**
 - :briefcase: LinkedIn: https://www.linkedin.com/in/jaewon-yang/
+- :school_satchel: Website: https://j1yang.github.io/portfolio
 - :mailbox: dev.j1yang@gmail.com
 
 **Jisang Kim**
