@@ -9,16 +9,24 @@ function App() {
   
 
   async function extractSelectedText() {
-    console.log(12443);
       const selectedText = window.getSelection().toString();
-      sendTextToServer(selectedText);
-    // try {
-    //   console.log(12443);
-    //   const selectedText = window.getSelection().toString();
-    //   sendTextToServer(selectedText);
-    // } catch (error) {
-    //   console.error('Error extracting and sending text:', error);
-    // }
+      // console.log(selectedText);
+      // fetch('http://127.0.0.1:8000/analyze').then((res) => {
+      //   console.log(res);
+      // })
+
+      const response = await fetch('http://127.0.0.1:8000/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ terms: selectedText })
+      });
+      console.log('started');
+      const data = (await response.json()).message
+      console.log(data);
+      setResponse(data)
   }
 
   async function sendTextToServer(selectedText) {
@@ -57,9 +65,6 @@ function App() {
 
   return (
     <>
-      <div>
-        <img src={'original.png'} className="logo" alt="ALA logo" />
-      </div>
       <h1>AI Legal Assistant</h1>
       <div className="card">
         <button onClick={openExtensionPopup}>Extract Text</button>
