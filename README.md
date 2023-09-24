@@ -185,7 +185,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 - :briefcase: LinkedIn: https://linkedin.com/in/jisang-kim/
 - :mailbox: jjoo0815@gmail.com
 
-Project Link: [https://github.com/junseo-yang/castle-defense](https://github.com/junseo-yang/castle-defense)
+Project Link: [https://github.com/junseo-yang/BellGeekfest2023](https://github.com/junseo-yang/BellGeekfest2023)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
