@@ -4,36 +4,49 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+  const [response, setResponse] = useState(null) // Corrected 'resoponse' to 'response'
 
-  function sendTextToServer(text) {
-    fetch('http://127.0.0.1:5000/analyze', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ text: text }),
-    })
-    .then(response => response.text())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.log('Error:', error);
-    });
+  
+
+  async function extractSelectedText() {
+    console.log(12443);
+      const selectedText = window.getSelection().toString();
+      sendTextToServer(selectedText);
+    // try {
+    //   console.log(12443);
+    //   const selectedText = window.getSelection().toString();
+    //   sendTextToServer(selectedText);
+    // } catch (error) {
+    //   console.error('Error extracting and sending text:', error);
+    // }
   }
 
-  function extractSelectedText() {
-    const selectedText = window.getSelection().toString();
-    alert(selectedText)
-    sendTextToServer(selectedText);
+  async function sendTextToServer(selectedText) {
+    try {
+      console.log('Sending request to server...'); 
+      const response = await fetch('http://127.0.0.1:8000/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ text: selectedText })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Received response from server:', data);
+      await setResponse(data);
+
+    } catch (error) {
+      console.error('Error sending data to server:', error);
+    }
   }
 
-  const openExtensionPopup = () =>{
-    // chrome.scripting.executeScript({
-    //   target: {tabId: chrome.tabs.getCurrent().id},
-    //   func: extractSelectedText
-    // });
-
+  const openExtensionPopup = () => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.scripting.executeScript({
         target: {tabId: tabs[0].id},
@@ -45,20 +58,16 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <img src={'original.png'} className="logo" alt="ALA logo" />
       </div>
       <h1>AI Legal Assistant</h1>
       <div className="card">
         <button onClick={openExtensionPopup}>Extract Text</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {response && <p className="read-the-docs">
+        {response}
+      </p>}
+      {!response && <p className='read-the-docs'>please drag text and extract!</p>}
     </>
   )
 }
