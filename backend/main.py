@@ -12,17 +12,17 @@ def analyze():
     data = request.get_json()
     terms = data['terms']
 
-    print(f'Please analyze the following terms and conditions for any potential privacy concerns. If you identify any privacy-related issues, please highlight them. **Warning: Privacy concern found**{terms}')
-    response = openai.Completion.create(
-        engine='davinci-002',
-        prompt=f'Please analyze the following terms and conditions for any potential privacy concerns. If you identify any privacy-related issues, please highlight them. **Warning: Privacy concern found**{terms}',
-        max_tokens=1000,
-        n=1,
-        stop=['.']
+    response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+            {"role": "system", "content": "I am lawyer who explains easily about it for users"},
+            {"role": "user", "content": f"Can you tell what private information can be opened based on {terms}? Please tell me only keywords"},
+        ]
     )
-    analysis = response.choices[0].text.strip()
 
-    return jsonify({'analysis': analysis})
+    keywords = response.choices[0].message.content
+
+    return jsonify({'message': keywords})
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=8000)
