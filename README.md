@@ -8,7 +8,7 @@ are transmitted to A.I using chatgpt-3.5-turbo model through backend.
 The project is consisted of frontend and backend. In order to operate the project, you are required to have chrome with frontend running on the extension environment and to have 
 backend running with token to acces to open AI
 
-# Code system requirements
+# System requirements
 ## Backend
 1. Python 3.9.11
 2. Flask
