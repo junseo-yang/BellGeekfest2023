@@ -70,14 +70,14 @@ function App() {
 
   return (
     <>
-      <h1>AI Legal Assistant</h1>
+      <h1>Terms & Conditions Manager</h1>
       <div className="card">
         <button onClick={openExtensionPopup}>Extract Text</button>
       </div>
       {response1 && <p className="read-the-docs">
         {response1}
       </p>}
-      {!response1 && <p className='read-the-docs'>please drag text and extract!</p>}
+      {!response1 && <p className='read-the-docs'>Drag text and extract!</p>}
     </>
   )
 }

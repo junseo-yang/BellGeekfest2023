@@ -5,7 +5,7 @@ import openai
 
 app = Flask(__name__)
 CORS(app)
-openai.api_key = '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'
+openai.api_key = ''
 
 
 @app.route('/analyze', methods=['POST'])

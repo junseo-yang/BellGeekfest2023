@@ -64,6 +64,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+[![Demo gif][gif-demo]](https://github.com/junseo-yang/BellGeekfest2023)
+
 **TCM (Terms & Conditions Manager)** is a chrome extension supports you manage Terms & Conditions effectively!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -91,7 +93,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 1. Chrome
-2. Flask
+2. Python && Flask
+3. Node.js && npm
 
 ### Installation
 #### Run Locally
@@ -108,20 +111,30 @@ To get a local copy up and running follow these simple example steps.
     cd backend
     ```
 4. Change the `openai.api_key` in `main.py` with your [OpenAI API key](https://openai.com/blog/openai-api)
-5. Install python dependencies
+5. Set up `venv` for python
+    ```sh
+    mkdir venv
+    python3 -m venv ./venv
+    source ./venv/bin/activate
+    ``` 
+6. Install python dependencies && Run Flask Server
     ```sh
     pip install -r requirements.txt
+    python3 main.py # or python main.py
     ```
-6. Run Flask Server
-    ```sh
-    python3 main.py
-    ```
-7. Change Directory to `frontend`
+7. Open a new terminal
+8. Change Directory to `frontend`
     ```sh
     cd ../chrome-extension
     ```
-8. Add chrome extension to your browser
+9.  Install dependencies && Build frontend
+    ```sh
+    npm install
+    npx vite build
+    ```
+10. Add chrome extension `dist` directory to your browser
     1. [How to add your extension to the chrome browser](https://support.google.com/chrome/a/answer/2714278?hl=en#:~:text=Go%20to%20chrome%3A%2F%2Fextensions,right%2C%20turn%20on%20Developer%20mode.)
+11. Done! You are all set!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -213,3 +226,4 @@ Project Link: [https://github.com/junseo-yang/BellGeekfest2023](https://github.c
 [React-url]: https://react.dev/
 [Chrome]: https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white
 [Chrome-url]: https://www.google.com/intl/en_ca/chrome/
+[gif-demo]: demo/demo.gif
